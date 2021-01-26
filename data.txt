@@ -1,0 +1,19 @@
+stars.count 500000
+-----------
+start!
+removeDuplicatesNestedForLoop executing
+deduppedResultLength 8100
+end!
+elapsed time (ms): 91318
+-----------
+start!
+removeDuplicatesNestedWithIncludes executing
+deduppedResultLength 8100
+end!
+elapsed time (ms): 34857
+-----------
+start!
+removeDuplicatesFast executing
+deduppedResultLength 8100
+end!
+elapsed time (ms): 333
