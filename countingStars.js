@@ -123,17 +123,17 @@ const starNameGenerator = () => {
   return `PSRJ${random1}-${random2}`
 }
 
-//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 100000, 500000, 1000000]
-//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 100000, 500000]
+//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000]
+//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000]
 
-const iterationCounts = [500000, 1000000]
+const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000]
 const iterationTimes = []
 
 // let functionToTest = removeDuplicatesNestedForwardNoBreak
 // let functionToTest = removeDuplicatesNestedForwardBreak
 // let functionToTest = removeDuplicatesNestedBackwardBreak
 // let functionToTest = removeDuplicatesNestedBackwardIncludes
-// let functionToTest = removeDuplicatesFast
+let functionToTest = removeDuplicatesFast
 
 iterationCounts.forEach((count) => {
 
@@ -192,3 +192,9 @@ console.log('iterationTimes', iterationTimes)
 // let removeDuplicatesNestedBackwardBreak    = [0, 1, 1, 5, 5, 6, 11, 37, 77, 177, 386, 7957, 41281, 84406]
 // let removeDuplicatesNestedBackwardIncludes = [0, 0, 0, 1, 2, 5, 8, 30, 66, 152, 330, 6679, 34915, 69962]
 // let removeDuplicatesFast                   = [0, 0, 1, 0, 0, 1, 1, 3, 5, 13, 11, 65, 259, 451]
+
+
+//[0, 0, 1, 6, 9, 10, 19, 69, 149, 396, 968, 1472, 7790, 27128, 100371]
+//[1, 0, 4, 6, 8, 10, 17, 64, 136, 320, 718, 1004, 3518, 8018, 17181]
+//[0, 0, 1, 7, 7, 7, 10, 38, 82, 180, 383, 529, 1769, 3980, 8336]
+//[0, 0, 0, 1, 2, 5, 9, 31, 69, 150, 328, 446, 1463, 3227, 6953]
