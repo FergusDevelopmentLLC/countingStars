@@ -1,45 +1,17 @@
-const removeDuplicatesNestedWorst = (array) => {
+const removeDuplicatesNestedForwardNoBreak = (array) => {
   
-  console.log('removeDuplicatesNestedWorst executing')
+  console.log('removeDuplicatesNestedForwardNoBreak executing')
 
   let returnArray = []
   
   for (let i = 0; i < array.length; i++){
+
     const itemToCheck = array[i]
+    
     let duplicateFound = false
 
     for (let j = 0; j < array.length; j++){
-      if(i === j) {
-        continue
-      }
-      else {
-        if(itemToCheck === returnArray[j]) {
-          duplicateFound = true
-        }
-      }
-    }
-
-    if(!duplicateFound) {
-      returnArray.push(itemToCheck)
-    }
-  }
-  
-  return returnArray
-}
-
-
-const removeDuplicatesNestedForLoop = (array) => {
-  
-  console.log('removeDuplicatesNestedForLoop executing')
-
-  let returnArray = []
-  
-  for (let i = 0; i < array.length; i++){
-    const itemToCheck = array[i]
-    let duplicateFound = false
-    
-    for (let j = 0; j < returnArray.length; j++){
-      if(itemToCheck === returnArray[j]) {
+      if(i !== j && itemToCheck === returnArray[j]) {
         duplicateFound = true
       }
     }
@@ -52,9 +24,62 @@ const removeDuplicatesNestedForLoop = (array) => {
   return returnArray
 }
 
-const removeDuplicatesNestedWithIncludes = (array) => {
+
+const removeDuplicatesNestedForwardBreak = (array) => {
   
-  console.log('removeDuplicatesNestedWithIncludes executing')
+  console.log('removeDuplicatesNestedForwardBreak executing')
+
+  let returnArray = []
+  
+  for (let i = 0; i < array.length; i++){
+
+    const itemToCheck = array[i]
+    
+    let duplicateFound = false
+
+    for (let j = 0; j < array.length; j++){
+      if(i !== j && itemToCheck === returnArray[j]) {
+        duplicateFound = true
+        break
+      }
+    }
+
+    if(!duplicateFound) {
+      returnArray.push(itemToCheck)
+    }
+  }
+  
+  return returnArray
+}
+
+const removeDuplicatesNestedBackwardBreak = (array) => {
+  
+  console.log('removeDuplicatesNestedBackwardBreak executing')
+
+  let returnArray = []
+  
+  for (let i = 0; i < array.length; i++){
+    const itemToCheck = array[i]
+    let duplicateFound = false
+    
+    for (let j = 0; j < returnArray.length; j++){
+      if(itemToCheck === returnArray[j]) {
+        duplicateFound = true
+        break
+      }
+    }
+
+    if(!duplicateFound) {
+      returnArray.push(itemToCheck)
+    }
+  }
+  
+  return returnArray
+}
+
+const removeDuplicatesNestedBackwardIncludes = (array) => {
+  
+  console.log('removeDuplicatesNestedBackwardIncludes executing')
   
   let returnArray = []
   
@@ -100,13 +125,15 @@ const starNameGenerator = () => {
 
 //const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 100000, 500000, 1000000]
 //const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 100000, 500000]
-const iterationCounts = [1000000]
+
+const iterationCounts = [500000, 1000000]
 const iterationTimes = []
 
-let functionToTest = removeDuplicatesNestedWorst
-//let functionToTest = removeDuplicatesNestedForLoop
-//let functionToTest = removeDuplicatesNestedWithIncludes
-//let functionToTest = removeDuplicatesFast
+// let functionToTest = removeDuplicatesNestedForwardNoBreak
+// let functionToTest = removeDuplicatesNestedForwardBreak
+// let functionToTest = removeDuplicatesNestedBackwardBreak
+// let functionToTest = removeDuplicatesNestedBackwardIncludes
+// let functionToTest = removeDuplicatesFast
 
 iterationCounts.forEach((count) => {
 
@@ -119,11 +146,13 @@ iterationCounts.forEach((count) => {
 
   console.log('-----------')
   console.log('start!')
+  console.log('stars', stars)
   console.log('stars.length', stars.length)
   const start = Date.now()
   deDupped = functionToTest(stars)
-  console.log('deduppedResultLength', deDupped.length)
   const end = Date.now()
+  console.log('deDupped', deDupped)
+  console.log('deduppedResultLength', deDupped.length)
   const elapsedTime = end - start
   iterationTimes.push(elapsedTime)
   console.log('elapsed time (ms):', elapsedTime)
@@ -132,16 +161,34 @@ iterationCounts.forEach((count) => {
 })
 
 console.log('iterationTimes', iterationTimes)
+// [0, 1, 1, 6, 8, 10, 20, 68, 151, 398, 969, 99786]
 
-//removeDuplicatesNestedWorst =>        [1, 0, 1, 8, 8, 10, 18, 68, 148, 399, 965, 97503, 2169161, ]
-//removeDuplicatesNestedForLoop =>      [0, 1, 1, 6, 6, 6, 10, 40, 88, 228, 504, 16079, 86552, 177686] 
-//removeDuplicatesNestedWithIncludes => [0, 0, 0, 0, 3, 6, 9, 34, 68, 150, 320, 6740, 34915, 69962]
-//removeDuplicatesFast =>               [0, 0, 1, 1, 2, 2, 2, 3, 6, 13, 11, 54, 259, 451]
+// const stars = [
+//   'PSRJ73-98', 'PSRJ33-50', 'PSRJ64-81', 'PSRJ51-41', 'PSRJ21-13',
+//   'PSRJ10-10', 'PSRJ52-88', 'PSRJ56-72', 'PSRJ84-59', 'PSRJ52-90',
+//   'PSRJ53-29', 'PSRJ38-54', 'PSRJ74-73', 'PSRJ47-52', 'PSRJ36-97',
+//   'PSRJ13-86', 'PSRJ79-99', 'PSRJ11-43', 'PSRJ46-35', 'PSRJ13-86',
+//   'PSRJ21-46', 'PSRJ31-63', 'PSRJ51-14', 'PSRJ62-71', 'PSRJ50-84',
+//   'PSRJ36-46', 'PSRJ97-82', 'PSRJ25-39', 'PSRJ59-88', 'PSRJ19-31',
+//   'PSRJ53-28', 'PSRJ67-71', 'PSRJ51-93', 'PSRJ15-22', 'PSRJ16-54',
+//   'PSRJ24-79', 'PSRJ69-39', 'PSRJ40-18', 'PSRJ70-40', 'PSRJ69-11',
+//   'PSRJ51-27', 'PSRJ13-86', 'PSRJ27-77', 'PSRJ63-38', 'PSRJ35-84',
+//   'PSRJ21-88', 'PSRJ72-36', 'PSRJ48-97', 'PSRJ94-37', 'PSRJ61-57',
+//   'PSRJ40-42', 'PSRJ27-85', 'PSRJ58-51', 'PSRJ69-85', 'PSRJ27-94',
+//   'PSRJ22-66', 'PSRJ64-91', 'PSRJ62-56', 'PSRJ12-19', 'PSRJ97-70',
+//   'PSRJ52-30', 'PSRJ76-24', 'PSRJ73-91', 'PSRJ43-65', 'PSRJ65-15',
+//   'PSRJ83-95', 'PSRJ31-71', 'PSRJ75-58', 'PSRJ64-18', 'PSRJ23-31',
+//   'PSRJ68-56', 'PSRJ95-32', 'PSRJ13-86', 'PSRJ84-37', 'PSRJ97-68',
+//   'PSRJ16-41', 'PSRJ71-76', 'PSRJ38-35', 'PSRJ29-40', 'PSRJ58-42',
+//   'PSRJ76-24', 'PSRJ13-41', 'PSRJ79-84', 'PSRJ91-37', 'PSRJ80-63',
+//   'PSRJ25-27', 'PSRJ56-12', 'PSRJ60-26', 'PSRJ32-70', 'PSRJ98-46',
+//   'PSRJ61-70', 'PSRJ73-63', 'PSRJ18-73', 'PSRJ13-86', 'PSRJ21-72',
+//   'PSRJ35-32', 'PSRJ23-79', 'PSRJ16-60', 'PSRJ15-54', 'PSRJ75-12'
+// ]
 
-// https://www.space.com/57-stars-formation-classification-and-constellations.html
-// Since there are so many stars in the universe, the IAU uses a different system for newfound stars. 
-// Most consist of an abbreviation that stands for either the type of star or a catalog that lists 
-// information about the star, followed by a group of symbols. For instance, PSR J1302-6350 is a pulsar, 
-// thus the PSR. The J reveals that a coordinate system known as J2000 is being used, while the 1302 and 
-// 6350 are coordinates similar to the latitude and longitude codes used on Earth.
-//https://observablehq.com/d/5047e2d77faa54dd
+
+// let removeDuplicatesNestedForwardNoBreak   = [0, 0, 1, 5, 8, 10, 17, 69, 148, 395, 965, 97644, 2169161, 3303771, 9240961]
+// let removeDuplicatesNestedForwardBreak     = [0, 0, 1, 6, 7, 9, 16, 61, 128, 318, 685, 16045, 88274, 180540]
+// let removeDuplicatesNestedBackwardBreak    = [0, 1, 1, 5, 5, 6, 11, 37, 77, 177, 386, 7957, 41281, 84406]
+// let removeDuplicatesNestedBackwardIncludes = [0, 0, 0, 1, 2, 5, 8, 30, 66, 152, 330, 6679, 34915, 69962]
+// let removeDuplicatesFast                   = [0, 0, 1, 0, 0, 1, 1, 3, 5, 13, 11, 65, 259, 451]
