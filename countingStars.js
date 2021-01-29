@@ -1,6 +1,15 @@
-const removeDuplicatesNestedForwardNoBreak = (array) => {
+const makeStars = (count) => {
+  const stars = []
+  for (let i = 0; i < count; i++) {
+    let star = starNameGenerator()
+    stars.push(star)
+  }
+  return stars
+}
+
+const removeDuplicatesNested = (array) => {
   
-  console.log('removeDuplicatesNestedForwardNoBreak executing')
+  console.log('removeDuplicatesNestedForward executing')
 
   let returnArray = []
   
@@ -119,49 +128,52 @@ const removeDuplicatesFast = (array) => {
 const starNameGenerator = () => {
   const random1 = Math.floor(10 + Math.random() * 90)
   const random2 = Math.floor(10 + Math.random() * 90)
-  // console.log("*")
   return `PSRJ${random1}-${random2}`
 }
 
-//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000]
-//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000]
+const returnLast = (array) => {
+  console.log('returnLast executing')
+  return array[array.length - 1]
+}
 
-const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000]
+const removeDashesFrom = (array) => {
+  console.log('removeDashesFrom executing')
+  for (let i = 0; i < array.length; i++) {
+    array[i] = array[i].replace('-', '')
+  }
+  return array
+}
+
+//const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000, 500000, 1000000]
+const iterationCounts = [1, 10, 100, 250, 500, 750, 1000, 2000, 3000, 5000, 8000, 10000, 25000, 50000, 100000, 500000, 1000000]
 const iterationTimes = []
 
-// let functionToTest = removeDuplicatesNestedForwardNoBreak
-// let functionToTest = removeDuplicatesNestedForwardBreak
-// let functionToTest = removeDuplicatesNestedBackwardBreak
-// let functionToTest = removeDuplicatesNestedBackwardIncludes
+//let functionToTest = returnLast
+//let functionToTest = removeDashesFrom
+//let functionToTest = removeDuplicatesNestedForwardNoBreak
 let functionToTest = removeDuplicatesFast
 
 iterationCounts.forEach((count) => {
 
-  const stars = []
-
-  for (let i = 0; i < count; i++) {
-    let star = starNameGenerator()
-    stars.push(star)
-  }
+  const stars = makeStars(count)
+  //const stars = ['PSRJ73–98', 'PSRJ33–50', 'PSRJ64–81', 'PSRJ33–50', 'PSRJ21–13']
 
   console.log('-----------')
   console.log('start!')
   console.log('stars', stars)
   console.log('stars.length', stars.length)
   const start = Date.now()
-  deDupped = functionToTest(stars)
+  const result = functionToTest(stars)
+  console.log('result', result)
   const end = Date.now()
-  console.log('deDupped', deDupped)
-  console.log('deduppedResultLength', deDupped.length)
   const elapsedTime = end - start
   iterationTimes.push(elapsedTime)
-  console.log('elapsed time (ms):', elapsedTime)
   console.log('end!')
   
+  console.log('elapsed time (ms):', elapsedTime)
 })
-
+console.log('-----------')
 console.log('iterationTimes', iterationTimes)
-// [0, 1, 1, 6, 8, 10, 20, 68, 151, 398, 969, 99786]
 
 // const stars = [
 //   'PSRJ73-98', 'PSRJ33-50', 'PSRJ64-81', 'PSRJ51-41', 'PSRJ21-13',
